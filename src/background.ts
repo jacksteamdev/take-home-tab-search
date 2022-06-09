@@ -9,8 +9,9 @@ chrome.runtime.onInstalled.addListener(async () => {
     'https://vitejs.dev/',
     'https://developer.chrome.com/docs/extensions/reference/tabs',
     'https://www.youtube.com/c/JackandAmyDev',
+    'https://docs.google.com/document/d/e/2PACX-1vT83srV6ufkHJCnq631gvuanUBtbyE6MNE7C5bipC5xuh0qX258F8kB3jWfJ7TrKkr6WmNoh02Jmsu7/pub',
   ]) {
-    chrome.tabs.create({ url })
+    await chrome.tabs.create({ url })
   }
 
   // make sure search tab is on top
