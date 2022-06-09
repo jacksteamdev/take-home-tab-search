@@ -6,13 +6,15 @@
     panelHidden.set(false)
   })
 
-  function handleFormData(e: FormData) {
-    const searchTerm = e.get('searchTerm')
-    if (searchTerm !== '')
+  async function sendSearchTerm(searchTerm) {
+    try {
       return chrome.runtime.sendMessage({
         type: 'searchTerm',
         searchTerm,
       })
+    } catch (error) {
+      console.error(error)
+    }
   }
 </script>
 
@@ -20,7 +22,8 @@
   <form
     on:submit|preventDefault={(e) => {
       const formData = new FormData(e.currentTarget)
-      handleFormData(formData)
+      const searchTerm = formData.get('searchTerm')
+      if (searchTerm !== '') sendSearchTerm(searchTerm)
     }}
   >
     <label for="searchTerm">Search for a tab by title</label>
